@@ -5,4 +5,6 @@ declare module 'swiper' {
 
     export const Pagination: any;
     export const Navigation: any;
+    export const FreeMode: any
+    export const Thumbs: any
 }

@@ -1,7 +1,18 @@
-import React from "react";
+'use client'
+
+import React, {useState} from "react";
 import TransactionForm from "@/components/novels/dashboard/dashboard-income/TransactionForm";
+import IncomeTableData from "@/components/novels/dashboard/dashboard-income/IncomeTableData";
+import CalenderIncome from "@/components/novels/dashboard/dashboard-income/CalenderIncome";
 
 const IncomeTabContent = () => {
+    const [startDate, setStartDate] = useState<Date | null>(null);
+    const [endDate, setEndDate] = useState<Date | null>(null);
+
+    const handleDateChange = (start: Date | null, end: Date | null) => {
+        setStartDate(start);
+        setEndDate(end);
+    };
     return (
         <>
             <nav>
@@ -42,7 +53,11 @@ const IncomeTabContent = () => {
                     aria-labelledby="nav-item1-tab"
                 >
                     <div className="ps-widget bgc-white bdrs12 p30 position-relative">
-                        <h4 className="title fz17 mb30">Total Income</h4>
+                        <div className="d-flex justify-content-between">
+                            <h4 className="title fz17 mb30">Total Income</h4>
+                            <CalenderIncome onDateChange={handleDateChange} />
+                        </div>
+                        <IncomeTableData startDate={startDate} endDate={endDate} />
                     </div>
                 </div>
 

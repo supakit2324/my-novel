@@ -62,11 +62,6 @@ const DboardMobileNavigation = () => {
       title: "MANAGE ACCOUNT",
       items: [
         {
-          href: "/dashboard-my-package",
-          icon: "flaticon-protection",
-          text: "My Package",
-        },
-        {
           href: "/dashboard-my-profile",
           icon: "flaticon-user",
           text: "My Profile",

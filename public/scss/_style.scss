@@ -9981,6 +9981,60 @@ input:focus-visible {
     border-color: #dddddd;
 }
 
+.table-style4.table {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    border-spacing: inherit;
+    border-collapse: separate;
+}
+.table-style4 .t-head {
+    background-color: #ccd1e0;
+    border-radius: 12px;
+}
+.table-style4 .t-head th {
+    border: 0;
+    color: var(--headings-color);
+    font-family: var(--title-font-family);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 20px 30px;
+}
+.table-style4 .t-body th {
+    color: var(--headings-color);
+    font-family: var(--title-font-family);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 20px 30px;
+}
+.table-style4 .t-body td {
+    color: var(--headings-color);
+    font-family: var(--title-font-family);
+    font-weight: 400;
+    padding: 20px 30px;
+}
+.table-style4 .t-body tr:last-child {
+    border-color: transparent;
+}
+.table-style4 .icon {
+    background-color: #ffffff;
+    border-radius: 4px;
+    color: var(--headings-color);
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    width: 40px;
+    -webkit-transition: all 0.3s ease 0s ease;
+    -o-transition: all 0.3s ease 0s ease;
+    transition: all 0.3s ease 0s ease;
+}
+.table-style4 .icon:hover {
+    background-color: #f7f7f7;
+}
+.table-style4.at-savesearch .t-body tr:last-child {
+    border-color: #dddddd;
+}
+
 .invoice_table {
     background-color: #ffffff;
     -webkit-box-shadow: 0px 1px 4px rgba(24, 26, 32, 0.07);
@@ -10635,4 +10689,10 @@ input:focus-visible {
 .pending-style.top-up-style3 {
     background-color: #fff5f8;
     color: #f1416c;
+}
+
+.card-action-my-novel-detail {
+    background-color: #71c3fd;
+    padding: 8px 10px;
+    border-radius: 10px;
 }

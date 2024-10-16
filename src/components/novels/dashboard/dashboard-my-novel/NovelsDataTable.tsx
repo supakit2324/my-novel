@@ -1,72 +1,9 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import {NovelTypes} from "@/enums/novel-types.enum";
-
-enum Status {
-  NEW = 'New',
-}
-
-type Novels = {
-  id: string,
-  title: string,
-  imageSrc: string,
-  status: Status,
-  section: string,
-  type: NovelTypes,
-  word: number,
-  views: number,
-  collection: number
-}
-
-const NovelsData: Novels[] = [
-  {
-    id: 'Nasdw1523ad',
-    title: 'ขอบคุณท่านบรรพบุรุษ ที่ส่งระบบหัวขวดมาให้!!',
-    imageSrc: '/images/novels/134353009.jfif',
-    status: Status.NEW,
-    section: '1-5',
-    type: NovelTypes.NOVEL,
-    word: 30,
-    views: 20000,
-    collection: 1
-  },
-  {
-    id: 'pa2dw1523ad',
-    title: 'ทะลุมิติซุปเปอร์พี่สาวสุดแกร่ง กับระบบสินค้าสู่ความมั่งคั่ง',
-    imageSrc: '/images/novels/66ecdc03PPmJEZVn.jpeg',
-    status: Status.NEW,
-    type: NovelTypes.NOVEL,
-    section: '1-7',
-    word: 50,
-    views: 30000,
-    collection: 3
-  },
-  {
-    id: 'pa2w252as65d41',
-    title: 'จะไปผจญภัยต่างโลกทั้งทีกลายเป็นผู้หญิงไปซะแล้ว',
-    imageSrc: '/images/novels/1613414653_40887198.png',
-    status: Status.NEW,
-    type: NovelTypes.NOVEL,
-    section: '1-10',
-    word: 33,
-    views: 2733,
-    collection: 1
-  },
-  {
-    id: 'pa2w252aslaA41',
-    title: 'กำเนิดร่างเทวะบรรพกาล',
-    imageSrc: '/images/novels/e2c5e937-10dd-45dc-8769-77e4ec07c171.webp',
-    status: Status.NEW,
-    section: '1-15',
-    type: NovelTypes.FANFIC,
-    word: 13,
-    views: 12593,
-    collection: 3
-  }
-]
+import {Novels, fetchNovels as fetchNovelsData} from "@/hooks/use-novels";
 
 const getStatusStyle = (status: string) => {
   switch (status) {
@@ -82,21 +19,46 @@ const getStatusStyle = (status: string) => {
 };
 
 const NovelsDataTable = ({ selectedType }: { selectedType: string }) => {
-  const filteredNovels = NovelsData.filter(novel => selectedType === "all" || novel.type.toLowerCase() === selectedType.toLowerCase());
+  const [novels, setNovels] = useState<Novels[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchNovelsData();
+        setNovels(data);
+      } catch (error) {
+        console.error("Error fetching novels:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const filteredNovels = novels.filter(
+      (novel) =>
+          selectedType === "all" || novel.type.toLowerCase() === selectedType.toLowerCase()
+  );
 
   const changeType = (value: string) => {
     if (value === "all") {
-      return 'All Types'
+      return "All Types";
     }
 
     if (value === "fanfic") {
-      return 'Fanfic'
+      return "Fanfic";
     }
 
     if (value === "novel") {
-      return 'Novels'
+      return "Novels";
     }
-  }
+  };
 
   return (
       <table className="table-style3 table at-savesearch ">
@@ -127,7 +89,7 @@ const NovelsDataTable = ({ selectedType }: { selectedType: string }) => {
                   </div>
                   <div className="list-content py-0 p-0 mt-2 mt-xxl-0 ps-xxl-4">
                     <div className="h6 list-title">
-                      <Link href={`/single-v1/${novel.id}`}>{novel.title}</Link>
+                      <Link href={`/dashboard-my-novel/${novel.id}`}>{novel.title}</Link>
                     </div>
                   </div>
                 </div>
@@ -141,10 +103,18 @@ const NovelsDataTable = ({ selectedType }: { selectedType: string }) => {
               <td className="vam">{novel.collection}</td>
               <td className="vam">
                 <div className="d-flex">
-                  <button className="icon" style={{ border: "none" }} data-tooltip-id={`edit-${novel.id}`}>
+                  <button
+                      className="icon"
+                      style={{ border: "none" }}
+                      data-tooltip-id={`edit-${novel.id}`}
+                  >
                     <span className="fas fa-pen fa" />
                   </button>
-                  <button className="icon" style={{ border: "none" }} data-tooltip-id={`delete-${novel.id}`}>
+                  <button
+                      className="icon"
+                      style={{ border: "none" }}
+                      data-tooltip-id={`delete-${novel.id}`}
+                  >
                     <span className="flaticon-bin" />
                   </button>
                   <ReactTooltip id={`edit-${novel.id}`} place="top" content="Edit" />
