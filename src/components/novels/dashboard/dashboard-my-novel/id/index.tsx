@@ -32,11 +32,7 @@ const DashboardMyNovelOfAuthorById = () => {
     return (
         <div>
             <form>
-                <div className="">
-                    <div className="">
-                        <NovelDescriptionById id={id}/>
-                    </div>
-                </div>
+                <NovelDescriptionById id={id}/>
             </form>
         </div>
     )
