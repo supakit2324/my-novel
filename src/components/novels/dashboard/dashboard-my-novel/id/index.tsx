@@ -32,11 +32,8 @@ const DashboardMyNovelOfAuthorById = () => {
     return (
         <div>
             <form>
-                <div className="row justify-content-center">
-                    <div className="col-sm-12 col-md-6 col-xl-3">
-                        <UploadImageCover imageSrc={novels?.imageSrc || null}/>
-                    </div>
-                    <div className="col-sm-12 col-md-6 col-xl-8">
+                <div className="">
+                    <div className="">
                         <NovelDescriptionById id={id}/>
                     </div>
                 </div>

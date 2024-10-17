@@ -22,8 +22,8 @@ const UploadImageCover = ({ imageSrc }: NovelDescriptionProps) => {
     };
 
     return (
-        <div className="profile-box position-relative d-md-flex align-items-end mb50">
-            <div className="book-cover-img new position-relative justify-content-center overflow-hidden bdrs12 mb20-sm">
+        <div className="profile-box position-relative d-md-flex align-items-end justify-content-center">
+            <div className="book-cover-img new position-relative justify-content-center overflow-hidden bdrs12">
                 <Image
                     width={240}
                     height={220}
