@@ -10875,3 +10875,62 @@ input:focus-visible {
 .novel-create-episode-button:hover {
     background-color: #0056b3;
 }
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.toolbar-button {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toolbar-button i {
+    font-size: 16px;
+    color: #495057;
+}
+
+.toolbar-button:hover {
+    background-color: #e9ecef;
+}
+
+.toolbar-button.is-active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.toolbar-button.is-active i {
+    color: white;
+}
+
+.editor-content {
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+}
+
+.editor-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
+.image-container .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 5px;
+    cursor: pointer;
+    border-radius: 50%;
+}

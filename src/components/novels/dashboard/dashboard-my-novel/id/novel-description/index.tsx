@@ -39,8 +39,6 @@ const  NovelDescriptionById = ({ id }: NovelDescriptionProps) => {
         fetchNovelEp();
     }, []);
 
-    console.log(novelEp)
-
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -77,7 +75,7 @@ const  NovelDescriptionById = ({ id }: NovelDescriptionProps) => {
                             <div className="novel-episode-grid">
                                 {novelEp?.map((episode) => (
                                     <div key={episode.id} className="novel-episode-block">
-                                        <Link href="#">
+                                        <Link href={`/dashboard-my-novel/${id}/episode-edit/${episode.id}`}>
                                             <span className="btn novel-episode-btn">{`บทที่ ${episode.episode}`}</span>
                                             <div className="tooltip">{episode.episodeName}</div>
                                         </Link>

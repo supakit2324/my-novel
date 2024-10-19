@@ -1,52 +1,69 @@
-'use client';
-
-import React, {Dispatch, SetStateAction, useEffect, useState} from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Bold from '@tiptap/extension-bold';
-import Italic from '@tiptap/extension-italic';
-import Underline from '@tiptap/extension-underline';
-import Strike from '@tiptap/extension-strike';
-import Highlight from '@tiptap/extension-highlight';
-import BulletList from '@tiptap/extension-bullet-list';
-import OrderedList from '@tiptap/extension-ordered-list';
-import ListItem from '@tiptap/extension-list-item';
-import Image from '@tiptap/extension-image';
+import {useParams} from "next/navigation";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {fetchEpisodeById as fetchNovelsData, NovelEpisode} from "@/hooks/use-novels";
+import {EditorContent, useEditor} from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Bold from "@tiptap/extension-bold";
+import Italic from "@tiptap/extension-italic";
+import Underline from "@tiptap/extension-underline";
+import Strike from "@tiptap/extension-strike";
+import Highlight from "@tiptap/extension-highlight";
+import BulletList from "@tiptap/extension-bullet-list";
+import OrderedList from "@tiptap/extension-ordered-list";
+import ListItem from "@tiptap/extension-list-item";
+import Image from "@tiptap/extension-image";
 import TextAlign from "@tiptap/extension-text-align";
 import FontFamily from "@tiptap/extension-font-family";
 import TextStyle from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
 
-interface AddNewEpisodeProps {
+interface UpdateEpisodeProps {
     content: Record<string, any>;
     setContent: Dispatch<SetStateAction<Record<string, any>>>;
 }
 
+
 const columnSetPrice = [
     {
-        label: 'Free', value: 'free', defaultChecked: true
+        label: "Free",
+        value: "free",
+        defaultChecked: true,
     },
     {
-        label: 'Set Price', value: 'set_price', defaultChecked: false
-    }
-]
-
-const columnSetPublish = [
-    {
-        label: 'Publish now', value: 'publish_now', defaultChecked: false
-    },
-    {
-        label: 'Not published', value: 'not_published', defaultChecked: true
-    },
-    {
-        label: 'Set publishing time', value: 'set_publishing_time', defaultChecked: false
+        label: "Set Price",
+        value: "set_price",
+        defaultChecked: false,
     },
 ];
 
-const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
-    const [selectedPriceOption, setSelectedPriceOption] = useState<string>('free');
-    const [publishOption, setPublishOption] = useState<string>('not_published');
-    const [publishTime, setPublishTime] = useState<string>('');
+const columnSetPublish = [
+    {
+        label: "Publish now",
+        value: "publish_now",
+        defaultChecked: false,
+    },
+    {
+        label: "Not published",
+        value: "not_published",
+        defaultChecked: true,
+    },
+    {
+        label: "Set publishing time",
+        value: "set_publishing_time",
+        defaultChecked: false,
+    },
+];
+
+const EditNovelEpisode = ({ content, setContent }: UpdateEpisodeProps) => {
+    const params = useParams();
+    const id = Array.isArray(params.episodeId) ? params.episodeId[0] : params.episodeId;
+    const [episode, setEpisode] = useState<NovelEpisode | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    const [selectedPriceOption, setSelectedPriceOption] = useState<string>("free");
+    const [publishOption, setPublishOption] = useState<string>("not_published");
+    const [publishTime, setPublishTime] = useState<string>("");
+
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -60,26 +77,53 @@ const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
             ListItem,
             Image,
             TextAlign.configure({
-                types: ['heading', 'paragraph'],
+                types: ["heading", "paragraph"],
             }),
             FontFamily,
             TextStyle,
-            Color
+            Color,
         ],
         content: content.body || '',
         onUpdate: ({ editor }) => {
             const updatedContent = editor.getHTML();
-            setContent((prev) => ({ ...prev, body: updatedContent }));
+            setContent((prev) => ({ ...prev, story: [updatedContent] }));
         },
     });
 
     useEffect(() => {
-        return () => {
-            if (editor) {
-                editor.destroy();
+        if (editor && content.body) {
+            editor.commands.setContent(content.body);
+        }
+    }, [editor, content.body]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchNovelsData(id);
+                setEpisode(data);
+
+                if (data) {
+                    setContent({
+                        title: data.episodeName,
+                        body: data.story,
+                        priceOption: data.priceOption || "free",
+                        publishOption: data.publishOption || "not_published",
+                        publishTime: data.publishTime || "",
+                        price: data.price || 0,
+                    });
+                    setSelectedPriceOption(data.priceOption || "free");
+                    setPublishOption(data.publishOption || "not_published");
+                    setPublishTime(data.publishTime || "");
+                }
+            } catch (error) {
+                console.error("Error fetching episode:", error);
+            } finally {
+                setLoading(false);
             }
         };
-    }, [editor]);
+
+        fetchData();
+    }, [id, setContent]);
 
     if (!editor) {
         return null;
@@ -107,8 +151,8 @@ const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
     const handlePublishOptionChange = (value: string) => {
         setPublishOption(value);
         setContent((prev) => ({ ...prev, publishOption: value }));
-        if (value !== 'set_publishing_time') {
-            setPublishTime('');
+        if (value !== "set_publishing_time") {
+            setPublishTime("");
         }
     };
 
@@ -127,8 +171,9 @@ const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
                             type="text"
                             className="form-control"
                             placeholder="Your Episode Name"
-                            value={content.title || ''}
-                            onChange={(e) => setContent((prev) => ({ ...prev, title: e.target.value }))} />
+                            value={content?.title || ''}
+                            onChange={(e) => setContent((prev) => ({...prev, title: e.target.value}))}
+                        />
                     </div>
                 </div>
 
@@ -259,7 +304,7 @@ const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
                                     </div>
                                 ))}
 
-                                {publishOption === 'set_publishing_time' && (
+                                {publishOption === "set_publishing_time" && (
                                     <div className="mt-3">
                                         <label className="heading-color ff-heading fw600 mb10">Select Publish Time</label>
                                         <input
@@ -270,15 +315,13 @@ const AddNewEpisode = ({ content, setContent }: AddNewEpisodeProps) => {
                                         />
                                     </div>
                                 )}
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
-export default AddNewEpisode;
+export default EditNovelEpisode
