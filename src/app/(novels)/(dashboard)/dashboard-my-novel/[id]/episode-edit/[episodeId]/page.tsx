@@ -52,7 +52,10 @@ const Page = () => {
                                 <div className="col-xl-12">
                                     <div
                                         className="ps-widget bgc-white bdrs12 default-box-shadow2 p30 mb30 overflow-hidden position-relative">
-                                        <EditNovelEpisode content={content} setContent={setContent} />
+                                        <div className="dashboard_title_area">
+                                            <h5>Update Episode</h5>
+                                        </div>
+                                        <EditNovelEpisode content={content} setContent={setContent}/>
                                     </div>
                                 </div>
                             </div>

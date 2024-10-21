@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 const DboardMobileNavigation = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const spiltPathname = pathname.split('/')[1];
 
   const sidebarItems = [
     {
@@ -99,7 +100,7 @@ const DboardMobileNavigation = () => {
                   <Link
                     href={item.href}
                     className={`items-center   ${
-                      pathname == item.href ? "-is-active" : ""
+                      `/${spiltPathname}` == item.href ? "-is-active" : ""
                     } `}
                   >
                     <i className={`${item.icon} mr15`} />
