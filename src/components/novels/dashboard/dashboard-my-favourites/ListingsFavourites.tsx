@@ -167,7 +167,7 @@ const ListingsFavourites = ({ selectedType }: { selectedType: string }) => {
                     </div>
                     <div className="list-content">
                       <h6 className="list-title1">
-                        <Link href={`/single-v3/${novel.id}`}>{novel.title}</Link>
+                        <Link href={`/dashboard-my-favourites/${novel.id}`}>{novel.title}</Link>
                       </h6>
                     </div>
                   </div>

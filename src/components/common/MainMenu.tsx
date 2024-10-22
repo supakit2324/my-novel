@@ -2,7 +2,7 @@ import {
     homeItems,
     blogItems,
     listingItems,
-    propertyItems,
+    NovelsItems,
     pageItems,
 } from "../../data/navItems";
 import Link from "next/link";
@@ -31,10 +31,10 @@ const MainMenu = () => {
                 setTopMenu("pages");
             }
         });
-        propertyItems.forEach((item) =>
+        NovelsItems.forEach((item) =>
             item.subMenuItems.forEach((elm) => {
                 if (elm.href.split("/")[1] == pathname.split("/")[1]) {
-                    setTopMenu("property");
+                    setTopMenu("Novel Dashboard");
                     setSubmenu(item.label);
                 }
             })
@@ -110,12 +110,12 @@ const MainMenu = () => {
           <span
               className={topMenu == "property" ? "title menuActive" : "title"}
           >
-            Property
+            Novel Dashboard
           </span>
                     <span className="arrow"></span>
                 </a>
                 <ul className="sub-menu">
-                    {propertyItems.map((item, index) => (
+                    {NovelsItems.map((item, index) => (
                         <li key={index} className="dropitem">
                             <a href="#">
                 <span

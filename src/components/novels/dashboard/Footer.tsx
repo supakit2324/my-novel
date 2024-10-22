@@ -10,7 +10,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="dashboard_footer pt30 pb10 darkblue-bg-500">
+    <footer className="dashboard_footer pt30 pb10">
       <div className="container">
         <div className="row items-center justify-content-center justify-content-md-between">
           <div className="col-auto">

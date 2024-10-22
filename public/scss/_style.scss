@@ -73,6 +73,7 @@ Tag: advanced search, agency, agent, classified, directory, house, listing, prop
     --divder-space: 200px;
     --headings-color: #181a20;
     --primary-color: #377DFF;
+    --footer-coler: #21325B
 }
 
 
@@ -220,7 +221,7 @@ li {
 
 /* All Type Of Footer Styles */
 .footer-style1 {
-    background-color: var(--headings-color);
+    background-color: var(--footer-coler);
 }
 .footer-style1.at-home2 {
     padding-top: 230px;
@@ -10108,6 +10109,10 @@ input:focus-visible {
     background-color: #bebdbd;
 }
 
+.bgc-charcoal-blue {
+    background-color: #25394D;
+}
+
 .dark-color,
 .heading-color,
 .title-color {
@@ -10933,4 +10938,496 @@ input:focus-visible {
     padding: 2px 5px;
     cursor: pointer;
     border-radius: 50%;
+}
+
+.nav-novel-content-active {
+    color: white;
+    font-weight: bold;
+    background: none;
+    border-bottom: 2px solid white
+}
+
+.nav-novel-content-inactive {
+    color: gray;
+    font-weight: normal;
+    background: none;
+    border: none;
+}
+
+.novel-episode-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 5px;
+}
+
+.novel-episode-content-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.novel-episode-content-btn {
+    display: block;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    min-height: 50px;
+    border: 1px solid #34495e;
+    transition: all 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.novel-episode-content-btn:hover {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
+.novel-content-tooltip {
+    visibility: hidden;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 12px;
+    transition: visibility 0.2s ease-in-out;
+}
+
+.novel-episode-content-block:hover .novel-content-tooltip {
+    visibility: visible;
+}
+
+.novel-info-container {
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tag {
+    background-color: #34495e;
+    color: #ecf0f1;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.full-height-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-grow-container {
+    flex: 1 0 auto;
+}
+
+.card-episode-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.comment-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.comment-chevron-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.comment-chevron-btn i {
+    font-size: 12px;
+    color: #333;
+}
+
+.comment-chevron-btn:hover {
+    background-color: #e1e1e1;
+}
+
+.comment-header-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.comment-tag {
+    background-color: #FF5851;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.comment-author {
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.comment-date {
+    color: #888;
+    font-size: 12px;
+}
+
+.comment-content {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.comment-body {
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+}
+
+.comment-body p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.episode-card-container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.episode-card {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.episode-card-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.episode-card-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.episode-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.episode-title span:first-child {
+    font-size: 14px;
+    color: #666;
+}
+
+.episode-title span:last-child {
+    font-size: 12px;
+    color: #888;
+}
+
+.episode-status {
+    font-size: 14px;
+    color: #007bff;
+}
+
+.episode-chevron-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.episode-chevron-btn i {
+    font-size: 14px;
+    color: #333;
+}
+
+.no-episode {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.comment-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 1200px;
+    height: 90vh;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.comment-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.modal-comment {
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.comment-header-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.comment-tag {
+    background-color: #12A6EC;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #888;
+}
+
+.comment-body {
+    margin-bottom: 10px;
+}
+
+.comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #999;
+}
+
+.more-options-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.more-options-btn i {
+    font-size: 18px;
+    color: #999;
+}
+
+.comment-input-container {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    background-color: white;
+}
+
+.comment-input-container {
+    width: 100%;
+    height: auto;
+}
+
+.new-comment-input {
+    width: 100%;
+    height: auto;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.new-comment-input:focus {
+    border: none;
+    outline: none;
+}
+
+.spoiler-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.spoiler-checkbox {
+    display: none;
+}
+
+.spoiler-label-text {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.spoiler-checkbox:checked + .spoiler-label .spoiler-label-text {
+    background-color: #12A6EC;
+    color: white;
+}
+
+.new-comment-submit-btn {
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+}
+
+.new-comment-submit-btn i {
+    color: #777;
+    font-size: 18px;
+}
+
+.comment-footer-action-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.comment-footer-action-content span {
+    padding: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.comment-footer-action-content span:hover {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+.reply-section {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.modal-comment.active .reply-section {
+    max-height: 300px;
+}
+
+.reply-section {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    padding-left: 20px;
+    margin-top: 10px;
+    border-left: 2px solid #e0e0e0;
+}
+
+.reply-comment {
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.reply-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.reply-author {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    margin-right: 10px;
+}
+
+.reply-body {
+    font-size: 14px;
+    color: #555;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.reply-likes {
+    font-size: 12px;
+    color: #999;
 }
